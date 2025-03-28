@@ -16,7 +16,7 @@ const Login = () => {
 
   const onSubmit = async (data) => {
     try {
-      const response = await axios.post("https://alumni-backend-test.onrender.com/api/v1/login", data);
+      const response = await axios.post("https://alumni-backend-kjdc.onrender.com/api/v1/login", data);
 
       const { accessToken, refreshToken } = response.data.data;
 
