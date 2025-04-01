@@ -79,12 +79,12 @@ const Navbar = () => {
                 className={`lg:hidden flex flex-col items-center gap-4 bg-[#0f393b] text-white py-5 transition-all ${isOpen ? "block" : "hidden"
                     }`}
             >
-                <a href="#" className="hover:text-blue-400">Home</a>
-                <a href="#" className="hover:text-blue-400">About Us</a>
+                <Link to="/home" className="hover:text-blue-400">Home</Link>
+                <Link to="/about" className="hover:text-blue-400">About Us</Link>
                 <a href="#" className="hover:text-blue-400">Subscription</a>
-                <a href="#" className="hover:text-blue-400">Alumni Connections</a>
-                <button className="login-button px-5 py-2 bg-white text-[#0f393b] rounded-3xl">
-                    Login
+                <Link to="/aluminiConnections" className="hover:text-blue-400">Alumni Connections</Link>
+                <button onClick={logoutAlumini} className="login-button px-5 py-2 bg-white text-[#0f393b] rounded-3xl">
+                    Logout
                 </button>
             </div>
         </div>

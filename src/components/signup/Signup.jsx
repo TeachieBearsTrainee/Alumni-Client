@@ -14,10 +14,9 @@ const Signup = () => {
     const onSubmit = (data) => {
         console.log("✅ Collected Data:", data);
 
-        // Remove `password2` and store the necessary fields
         const updatedData = {
             email: data.email,
-            password: data.password, // Store password for the backend
+            password: data.password,
         };
 
         console.log("🚀 Final Data to Pass:", updatedData);
@@ -25,9 +24,12 @@ const Signup = () => {
     };
 
     return (
-        <div className="h-screen w-full flex items-center justify-center bg-gray-900">
+        <div
+            className="h-screen w-full flex items-center justify-center bg-cover bg-center"
+            style={{ backgroundImage: "url('/images/loginback.jpg')" }}
+        >
             <form
-                className="bg-gray-800 p-8 rounded-xl shadow-lg w-[350px] flex flex-col gap-4"
+                className="bg-gray-800 p-8 rounded-xl shadow-lg w-[350px] flex flex-col gap-4 bg-opacity-90"
                 onSubmit={handleSubmit(onSubmit)}
             >
                 <h2 className="text-2xl font-semibold text-white text-center">
@@ -42,10 +44,7 @@ const Signup = () => {
                         className={`p-3 rounded-lg bg-gray-700 text-white outline-none focus:ring-2 focus:ring-green-500 ${
                             errors.email ? "border-2 border-red-500" : ""
                         }`}
-                        {...register("email", {
-                            // required: "Please enter email",
-                            // minLength: { value: 5, message: "Minimum length is 5" },
-                        })}
+                        {...register("email")}
                     />
                     {errors.email && (
                         <p className="text-red-500 text-sm">{errors.email.message}</p>
@@ -60,11 +59,7 @@ const Signup = () => {
                         className={`p-3 rounded-lg bg-gray-700 text-white outline-none focus:ring-2 focus:ring-green-500 ${
                             errors.password ? "border-2 border-red-500" : ""
                         }`}
-                        {...register("password", {
-                            // required: "Please enter password",
-                            // minLength: { value: 8, message: "Minimum length is 8" },
-                            // maxLength: { value: 12, message: "Maximum length is 12" },
-                        })}
+                        {...register("password")}
                     />
                     {errors.password && (
                         <p className="text-red-500 text-sm">{errors.password.message}</p>
@@ -79,13 +74,7 @@ const Signup = () => {
                         className={`p-3 rounded-lg bg-gray-700 text-white outline-none focus:ring-2 focus:ring-green-500 ${
                             errors.password2 ? "border-2 border-red-500" : ""
                         }`}
-                        {...register("password2", {
-                            // required: "Please confirm your password",
-                            // minLength: { value: 8, message: "Minimum length is 8" },
-                            // maxLength: { value: 18, message: "Maximum length is 18" },
-                            // validate: (value) =>
-                            //     value === watch("password") || "Passwords do not match",
-                        })}
+                        {...register("password2")}
                     />
                     {errors.password2 && (
                         <p className="text-red-500 text-sm">{errors.password2.message}</p>

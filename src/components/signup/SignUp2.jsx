@@ -12,14 +12,13 @@ const SignUp2 = () => {
   const [graduationCertificate, setgraduationCertificate] = useState(1);
 
   const handleFileChange = (event) => {
-    console.log("value---------->",event.target.value)
+    console.log("value---------->", event.target.value);
     setgraduationCertificate(event.target.files[0]);
   };
 
   const onSubmit = async (data) => {
-
     try {
-      console.log(responseData)
+      console.log(responseData);
       let finalData = { ...responseData, ...data };
 
       if (!graduationCertificate) {
@@ -35,12 +34,11 @@ const SignUp2 = () => {
       formData.append("bio", finalData.bio);
       formData.append("degree", finalData.degree);
       formData.append("city", finalData.city);
-      formData.append("graduationCertificate", graduationCertificate); // Use the actual file
+      formData.append("graduationCertificate", graduationCertificate);
       formData.append("email", responseData.email);
       formData.append("password", responseData.password);
 
       console.log([...formData.entries()]);
-  
 
       const token = localStorage.getItem("authToken");
 
@@ -65,82 +63,56 @@ const SignUp2 = () => {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-900">
-      {/* Removed nested <form> */}
+    <div className="flex h-screen justify-center items-center px-4 sm:px-6 lg:px-8 bg-cover bg-center" 
+      style={{ backgroundImage: "url('/images/loginback.jpg')" }}>
       <div className="w-full max-w-4xl bg-gray-800 text-white p-8 rounded-lg shadow-lg">
         <h2 className="text-3xl font-bold text-center mb-6">Sign Up</h2>
 
         <form onSubmit={handleSubmit(onSubmit)} encType="multipart/form-data">
-          <div className="grid grid-cols-2 gap-6">
-            <div className="flex flex-col space-y-4">
-              <div>
-                <label className="block text-gray-300">Full Name</label>
-                <input className="w-full p-3 bg-gray-700 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  {...register("fullname", { required: "Please enter your name" })}
-                />
-                {errors.fullname && <p className="text-red-500">{errors.fullname.message}</p>}
-              </div>
-
-              <div>
-                <label className="block text-gray-300">Profile Picture (URL)</label>
-                <input className="w-full p-3 bg-gray-700 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  {...register("profilePic")}
-                />
-              </div>
-
-              <div>
-                <label className="block text-gray-300">Branch</label>
-                <input className="w-full p-3 bg-gray-700 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  {...register("branch", { required: "Please enter your branch" })}
-                />
-                {errors.branch && <p className="text-red-500">{errors.branch.message}</p>}
-              </div>
-
-              <div>
-                <label className="block text-gray-300">Graduation Year</label>
-                <input className="w-full p-3 bg-gray-700 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  {...register("graduationYear", { required: "Please enter your graduation year" })}
-                />
-                {errors.graduationYear && <p className="text-red-500">{errors.graduationYear.message}</p>}
-              </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <div>
+              <label className="block text-gray-300">Full Name</label>
+              <input className="w-full p-3 bg-gray-700 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" {...register("fullname", { required: "Please enter your name" })} />
+              {errors.fullname && <p className="text-red-500">{errors.fullname.message}</p>}
             </div>
 
-            <div className="flex flex-col space-y-4">
-              <div>
-                <label className="block text-gray-300">Bio</label>
-                <input className="w-full p-3 bg-gray-700 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  {...register("bio", { required: "Please enter a bio" })}
-                />
-                {errors.bio && <p className="text-red-500">{errors.bio.message}</p>}
-              </div>
+            <div>
+              <label className="block text-gray-300">Profile Picture (URL)</label>
+              <input className="w-full p-3 bg-gray-700 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" {...register("profilePic")} />
+            </div>
 
-              <div>
-                <label className="block text-gray-300">Degree</label>
-                <input className="w-full p-3 bg-gray-700 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  {...register("degree")}
-                />
-              </div>
+            <div>
+              <label className="block text-gray-300">Branch</label>
+              <input className="w-full p-3 bg-gray-700 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" {...register("branch", { required: "Please enter your branch" })} />
+              {errors.branch && <p className="text-red-500">{errors.branch.message}</p>}
+            </div>
 
-              <div>
-                <label className="block text-gray-300">City</label>
-                <input className="w-full p-3 bg-gray-700 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  {...register("city")}
-                />
-              </div>
+            <div>
+              <label className="block text-gray-300">Graduation Year</label>
+              <input className="w-full p-3 bg-gray-700 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" {...register("graduationYear", { required: "Please enter your graduation year" })} />
+              {errors.graduationYear && <p className="text-red-500">{errors.graduationYear.message}</p>}
+            </div>
 
-              <div>
-                <label className="block text-gray-300">Graduation Certificate (PDF/IMG)</label>
-                <input type="file" className="w-full p-3 bg-gray-700 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  accept=".png,.jpg,.pdf"
-                  onChange={handleFileChange}
-                />
-                {!graduationCertificate && <p className="text-red-500">Certificate is required.</p>}
-              </div>
+            <div>
+              <label className="block text-gray-300">Bio</label>
+              <input className="w-full p-3 bg-gray-700 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" {...register("bio", { required: "Please enter a bio" })} />
+              {errors.bio && <p className="text-red-500">{errors.bio.message}</p>}
+            </div>
+
+            <div>
+              <label className="block text-gray-300">Degree</label>
+              <input className="w-full p-3 bg-gray-700 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" {...register("degree", { required: "Please enter your degree" })} />
+              {errors.degree && <p className="text-red-500">{errors.degree.message}</p>}
+            </div>
+
+            <div>
+              <label className="block text-gray-300">Graduation Certificate (PDF/IMG)</label>
+              <input type="file" className="w-full p-3 bg-gray-700 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" accept=".png,.jpg,.pdf" onChange={handleFileChange} />
+              {!graduationCertificate && <p className="text-red-500">Certificate is required.</p>}
             </div>
           </div>
 
-          <button type="submit"
-            className="mt-6 w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-lg transition duration-300">
+          <button type="submit" className="mt-6 w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-lg transition duration-300">
             Submit
           </button>
         </form>
